@@ -3,15 +3,20 @@
 #  Option 2: Force Delete the Secret Immediately
 # If you want to completely remove the old one right now:
 
+/*
+Yes — Option 2 permanently deletes the old secret so Terraform can create a new secret with the same name.
+
+If you don’t need the old secret’s value anymore, this is perfectly fine. 
+*/
 
 # bash
 # Copy
 # Edit
 #this is for to delete the secrets
 
-# aws secretsmanager delete-secret \
-#   --secret-id my-application-secret \
-#   --force-delete-without-recovery
+/*   aws secretsmanager delete-secret \
+  --secret-id my-application-secret \
+  --force-delete-without-recovery */
 
 # ⚠️ Warning: This is permanent — the secret will be gone instantly.
 #_____

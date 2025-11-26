@@ -1,0 +1,48 @@
+name: Deploy to ASG via OIDC
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: arn:aws:iam::676373376093:role/GitHubActionsRole
+          aws-region: us-west-2
+
+      - name: Verify AWS Identity
+        run: aws sts get-caller-identity
+
+      # ----------------------
+      # Update Launch Template
+      # ----------------------
+      - name: Update Launch Template with new user_data
+        run: |
+          aws ec2 create-launch-template-version \
+            --launch-template-id YOUR_TEMPLATE_ID \
+            --source-version 1 \
+            --launch-template-data "{
+              \"UserData\": \"$(base64 -w 0 user_data.sh)\"
+            }"
+
+      # ----------------------
+      # Trigger ASG instance refresh
+      # ----------------------
+      - name: Start ASG Instance Refresh
+        run: |
+          aws autoscaling start-instance-refresh \
+            --auto-scaling-group-name YOUR_ASG_NAME \
+            --preferences '{"MinHealthyPercentage": 100}'

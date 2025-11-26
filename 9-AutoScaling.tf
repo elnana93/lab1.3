@@ -1,5 +1,5 @@
 
-resource "aws_autoscaling_group" "app1_asg" {
+ resource "aws_autoscaling_group" "app1_asg" {
   name_prefix      = "app1-asg"
   max_size         = 3 #3
   min_size         = 3 #1
@@ -64,5 +64,5 @@ resource "aws_autoscaling_group" "app1_asg" {
     create_before_destroy = true
   }
 }
-
+ 
 

@@ -37,6 +37,9 @@ resource "aws_launch_template" "app1_template" {
               EOF
   )
 
+
+
+
   tag_specifications {
     resource_type = "instance"
 
@@ -67,3 +70,47 @@ data "aws_ami" "amazon_linux" {
 
   owners = ["137112412989"] # Amazon
 }
+
+
+
+
+
+
+/* user_data = base64encode(<<-EOF
+#!/bin/bash
+# Update system
+yum update -y
+
+# Install Apache web server
+yum install -y httpd
+
+# Start and enable Apache
+systemctl start httpd
+systemctl enable httpd
+
+# Create index.html with embedded image
+cat <<EOT > /var/www/html/index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E5TECH Web Page</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; background-color: #f0f0f0; }
+    img { max-width: 80%; height: auto; border-radius: 12px; margin: 30px 0; }
+    footer { background-color: #2c3e50; color: #fff; padding: 20px 0; margin-top: 40px; }
+  </style>
+</head>
+<body>
+  <h1>Site Secured By E5-TECH</h1>
+  <p>Operation Matrix • Escape Matrix</p>
+<img src="e5foto.jpg" alt="E5TECH Photo">
+  <footer>
+    <p>&copy; 2025 E5TECH Incorporated</p>
+  </footer>
+</body>
+</html>
+EOT
+EOF
+) */
