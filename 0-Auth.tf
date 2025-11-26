@@ -27,7 +27,6 @@ terraform {
 
 /* for exsisting plays
  git status
- git add assets/index.html
  git add .github/workflows/deploy.yml
  git commit -m "Add fixed deploy workflow"
  git push */

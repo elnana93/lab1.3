@@ -36,5 +36,5 @@ jobs:
       - name: Start ASG Instance Refresh
         run: |
           aws autoscaling start-instance-refresh \
-            --auto-scaling-group-name app1_asg \
-            --preferences '{"MinHealthyPercentage": 100}'
+          --auto-scaling-group-name app1-asg2025112603543304960000000a \
+          --preferences '{"MinHealthyPercentage": 100}'
