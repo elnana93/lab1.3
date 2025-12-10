@@ -1,6 +1,5 @@
 provider "aws" {
   region  = "us-west-2"
-  profile = "default"
 }
 
 terraform {
@@ -30,3 +29,10 @@ terraform {
  git add .github/workflows/deploy.yml
  git commit -m "Add fixed deploy workflow"
  git push */
+
+
+
+ # to basically figure out my asg - aws autoscaling describe-auto-scaling-groups --query "AutoScalingGroups[*].AutoScalingGroupName"
+
+
+# ls -l .github/workflows/ -  This command lets you see exactly what workflow files exist and verify their permissions and size before pushing or running GitHub Actions.

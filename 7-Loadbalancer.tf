@@ -28,12 +28,10 @@
 
 
 
-
-
-
 output "app1_url" {
   description = "Public URL to access the application"
   value       = "http://${aws_elb.app1_elb.dns_name}"
 } 
 
-
+/* create a iam role instead of policy in the future to get rid of the warning signal when i terraform destroy
+ */
